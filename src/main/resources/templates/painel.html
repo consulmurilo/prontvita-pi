@@ -2,18 +2,18 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Bem-vindo ao ProntVita</title>
+    <title>ProntVita</title>
     <link rel="stylesheet" th:href="@{/styles.css}">
 </head>
 <body>
-    <h1>Bem-vindo ao ProntVita</h1>
+    <h1>Bem-vindo ao sistema!</h1>
     <p>Seu prontuário médico digital.</p>
-    <a th:href="@{/login}">
-        <button>Login</button>
+    <a th:href="@{/cadastro-prontuario}">
+        <button>Cadastrar prontuário</button>
     </a>
     <br>
-    <a th:href="@{/cadastro-usuario}">
-        <button>Cadastre-se</button>
+    <a th:href="@{/historico}">
+        <button>Ver histórico de pacientes</button>
     </a>
 </body>
 </html>

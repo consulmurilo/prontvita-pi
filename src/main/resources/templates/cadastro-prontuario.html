@@ -1,15 +1,50 @@
 <!DOCTYPE html>
-<!--
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
--->
-<html>
-    <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
-        <div>TODO write content</div>
-    </body>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastro de Prontuário</title>
+    <link rel="stylesheet" th:href="@{/styles.css}">
+</head>
+<body>
+    <h1>Prontuário do Paciente</h1>
+    <form onsubmit="return validarProntuario()">
+        <label for="paciente">Nome do Paciente:</label>
+        <input type="text" id="paciente" name="paciente"><br>
+
+        <label for="data">Data (dd/mm/aaaa):</label>
+        <input type="text" id="data" name="data" placeholder="dd/mm/aaaa"><br>
+                
+        <label for="descricao">Descrição:</label><br>
+        <textarea id="descricao" name="descricao" rows="5" cols="40"></textarea><br>
+
+        <button type="submit">Salvar Prontuário</button>
+    </form>
+    <a th:href="@{/painel}">
+        <button>Voltar</button>
+    </a>
+
+    <script>      
+        function validarProntuario() {
+            const paciente = document.getElementById("paciente").value;
+            const data = document.getElementById("data").value;
+            const descricao = document.getElementById("descricao").value;
+
+            const regexData = /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/;           
+            
+            if (paciente === "" || data === "" || descricao === "") {
+                alert("Todos os campos são obrigatórios.");
+                return false;
+            }
+            
+            if (!regexData.test(data)) {
+                alert("Data inválida. Use o formato dd/mm/aaaa.");
+                return false;
+            }
+            
+            alert("Prontuário cadastrado com sucesso!");
+            this.reset();
+            return false;
+        }
+    </script>
+</body>
 </html>

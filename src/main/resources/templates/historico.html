@@ -1,15 +1,18 @@
 <!DOCTYPE html>
-<!--
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
--->
-<html>
-    <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
-        <div>TODO write content</div>
-    </body>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Histórico de Atendimentos</title>
+    <link rel="stylesheet" th:href="@{/styles.css}">
+</head>
+<body>
+    <h1>Histórico de Atendimentos</h1>
+    <ul>
+        <li>Consulta em 05/04/2025 - Dr. João - Acompanhamento de pressão arterial</li>
+        <li>Consulta em 12/03/2025 - Dra. Maria - Retorno de exames laboratoriais</li>
+    </ul>
+    <a th:href="@{/painel}">
+        <button>Voltar</button>
+    </a>
+</body>
 </html>
