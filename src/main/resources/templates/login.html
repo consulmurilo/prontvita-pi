@@ -7,33 +7,23 @@
 </head>
 <body>
     <h1>Login</h1>
-    <form onsubmit="return validarLogin()">
+
+    <div th:if="${erro}">
+        <p style="color: red;">[[${erro}]]</p>
+    </div>
+
+    <form action="/login" method="post">
         <label for="email">E-mail:</label>
-        <input type="email" id="email" name="email"><br>
+        <input type="email" id="email" name="email" required><br>
 
         <label for="senha">Senha:</label>
-        <input type="password" id="senha" name="senha"><br>
+        <input type="password" id="senha" name="senha" required><br>
 
         <button type="submit">Entrar</button>
     </form>
-    <a th:href="@{/}">    
+
+    <a th:href="@{/}">
         <button>Voltar</button>
     </a>
-
-    <script>
-        function validarLogin() {
-            const email = document.getElementById("email").value;
-            const senha = document.getElementById("senha").value;
-            if (email === "" || senha === "") {
-                alert("Preencha todos os campos.");
-                return false;
-            }
-            
-            alert("Login validado com sucesso!");
-            window.location.href = "/painel";
-            
-            return false;
-        }
-    </script>
 </body>
 </html>

@@ -7,44 +7,30 @@
 </head>
 <body>
     <h1>Prontuário do Paciente</h1>
-    <form onsubmit="return validarProntuario()">
-        <label for="paciente">Nome do Paciente:</label>
-        <input type="text" id="paciente" name="paciente"><br>
+    
+    <p th:if="${erroDesc}" th:text="${erroDesc}" style="color: red;"></p>
+    <p th:if="${erroData}" th:text="${erroData}" style="color:red;"></p>
 
-        <label for="data">Data (dd/mm/aaaa):</label>
-        <input type="text" id="data" name="data" placeholder="dd/mm/aaaa"><br>
-                
+    <form th:action="@{/cadastro-prontuario}" th:object="${prontuario}" method="post" onsubmit="return validarData()">
+        <label for="paciente">Paciente:</label>
+        <select id="paciente" name="paciente.id" required>
+            <option value="">Selecione o paciente</option>
+            <option th:each="usuario : ${usuarios}"
+                    th:value="${usuario.id}"
+                    th:text="${usuario.nome}"></option>
+        </select><br>
+            
+        <label for="data">Data do atendimento:</label>
+        <input type="text" id="data" name="dataBr" placeholder="DD/MM/AAAA" required>
+
         <label for="descricao">Descrição:</label><br>
-        <textarea id="descricao" name="descricao" rows="5" cols="40"></textarea><br>
+        <textarea id="descricao" name="descricao" th:field="*{descricao}" rows="5" cols="40"></textarea><br>
 
         <button type="submit">Salvar Prontuário</button>
     </form>
+
     <a th:href="@{/painel}">
         <button>Voltar</button>
     </a>
-
-    <script>      
-        function validarProntuario() {
-            const paciente = document.getElementById("paciente").value;
-            const data = document.getElementById("data").value;
-            const descricao = document.getElementById("descricao").value;
-
-            const regexData = /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/;           
-            
-            if (paciente === "" || data === "" || descricao === "") {
-                alert("Todos os campos são obrigatórios.");
-                return false;
-            }
-            
-            if (!regexData.test(data)) {
-                alert("Data inválida. Use o formato dd/mm/aaaa.");
-                return false;
-            }
-            
-            alert("Prontuário cadastrado com sucesso!");
-            this.reset();
-            return false;
-        }
-    </script>
 </body>
 </html>

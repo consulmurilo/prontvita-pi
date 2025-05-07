@@ -7,7 +7,16 @@
 </head>
 <body>
     <h1>Cadastro de Usuário</h1>
-    <form onsubmit="return validarCadastro()">
+    
+    <div th:if="${erro}">
+        <p style="color: red;">[[${erro}]]</p>
+    </div>
+    
+    <div th:if="${sucesso}">
+        <p style="color: green;">[[${sucesso}]]</p>
+    </div>
+
+    <form action="/cadastro-usuario" method="post">
         <label for="nome">Nome:</label>
         <input type="text" id="nome" name="nome"><br>
 
@@ -25,25 +34,9 @@
 
         <button type="submit">Cadastrar</button>
     </form>
+
     <a th:href="@{/}">
         <button>Voltar</button>
     </a>
-
-    <script>
-        function validarCadastro() {
-            const nome = document.getElementById("nome").value;
-            const email = document.getElementById("email").value;
-            const senha = document.getElementById("senha").value;
-            if (nome === "" || email === "" || senha === "") {
-                alert("Todos os campos devem ser preenchidos.");
-                return false;
-            }
-            
-            alert("Cadastro validado com sucesso!");
-            window.location.href = "/painel";
-            
-            return false;
-        }
-    </script>
 </body>
 </html>

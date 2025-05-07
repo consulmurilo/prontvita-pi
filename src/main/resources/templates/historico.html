@@ -7,10 +7,37 @@
 </head>
 <body>
     <h1>Histórico de Atendimentos</h1>
-    <ul>
-        <li>Consulta em 05/04/2025 - Dr. João - Acompanhamento de pressão arterial</li>
-        <li>Consulta em 12/03/2025 - Dra. Maria - Retorno de exames laboratoriais</li>
-    </ul>
+
+    <div th:if="${erro}">
+        <p style="color: red;">[[${erro}]]</p>
+    </div>
+
+    <form action="/historico" method="post">
+        <label for="pacienteId">Selecione o paciente:</label>
+        <select id="pacienteId" name="pacienteId" required>
+            <option value="">-- Selecione --</option>
+            <option th:each="usuario : ${usuarios}"
+                    th:value="${usuario.id}" 
+                    th:text="${usuario.nome}"></option>
+        </select>
+        <button type="submit">Buscar</button>
+    </form>
+
+    <hr>
+
+    <div th:if="${prontuarios}">
+        <h2>Prontuários:</h2>
+        <ul>
+            <li th:each="p : ${prontuarios}">
+                <span th:text="${#temporals.format(p.data, 'dd/MM/yyyy')}"></span> -
+                <span th:text="${p.descricao}"></span>
+            </li>
+        </ul>
+    </div>
+    <div th:if="${prontuarios == null}">
+        <p>Selecione um paciente para visualizar o histórico.</p>
+    </div>
+
     <a th:href="@{/painel}">
         <button>Voltar</button>
     </a>
